@@ -3,9 +3,17 @@ const tls = require('tls');
 const aedes = require('aedes')();
 const logger = require('node-color-log')
 
+/**
+ * Correspond à la clé et au certificat du serveur
+ */
 const key = fs.readFileSync('./auth/server/server.key');
 const cert = fs.readFileSync('./auth/server/server.crt');
 
+/**
+ * Le tableau user est facultatif
+ * Ici nous considérons que les acteurs sont enregistrés dans une possible
+ * base de donnée
+ */
 const users = [
     {
         id: 'pub_id',
@@ -21,6 +29,14 @@ const users = [
     },
 ];
 
+/**
+ * Cette fonctionnalité permet de :
+ * - Gérer la partie autentification
+ * @param {Object} client 
+ * @param {String} username 
+ * @param {Buffer} password 
+ * @param {Function} callback 
+ */
 aedes.authenticate = (client, username, password, callback) => {
     const data = {
         id: client.id,
@@ -35,6 +51,13 @@ aedes.authenticate = (client, username, password, callback) => {
     }
 };
 
+/**
+ * Cette fonctionnalité permet de :
+ * - Gérer le comportement pour les publications
+ * @param {Object} client 
+ * @param {Object} packet 
+ * @param {Function} callback 
+ */
 aedes.authorizePublish = (client, packet, callback) => {
     const userPublisher = users.find((user) => user.role === 'publisher');
     if (userPublisher && userPublisher.id === client.id) {
@@ -45,6 +68,13 @@ aedes.authorizePublish = (client, packet, callback) => {
     }
 }
 
+/**
+ * Cette fonctionnalité permet de :
+ * - Gérer le comportement pour les souscriptions
+ * @param {Object} client 
+ * @param {Object} sub 
+ * @param {Function} callback 
+ */
 aedes.authorizeSubscribe = (client, sub, callback) => {
     const userSubscriber= users.find((user) => user.role === 'subscriber');
     if (userSubscriber && userSubscriber.id === client.id) {
@@ -55,4 +85,8 @@ aedes.authorizeSubscribe = (client, sub, callback) => {
     }
 }
 
+/**
+ * Cette fonctionnalité permet de :
+ * - Créer une connexion de type TLS
+ */
 tls.createServer({ key, cert }, aedes.handle).listen(3000);
