@@ -10,9 +10,9 @@ const key = fs.readFileSync('./auth/server/server.key');
 const cert = fs.readFileSync('./auth/server/server.crt');
 
 /**
- * Le tableau user est facultatif
+ * Le tableau user est uniquement pour la démonstration
  * Ici nous considérons que les acteurs sont enregistrés dans une possible
- * base de donnée
+ * base de données
  */
 const users = [
     {
