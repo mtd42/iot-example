@@ -1,0 +1,20 @@
+{
+  "name": "iot_tuto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "broker.js",
+  "scripts": {
+    "broker": "nodemon broker.js",
+    "subscriber": "nodemon subscriber.js",
+    "publisher": "nodemon publisher.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aedes": "^0.45.0",
+    "aedes-logging": "^2.0.1",
+    "dotenv": "^8.2.0",
+    "mqtt": "^4.2.6",
+    "node-color-log": "^5.2.0"
+  }
+}
