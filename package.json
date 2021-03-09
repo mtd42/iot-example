@@ -4,9 +4,9 @@
   "description": "",
   "main": "broker.js",
   "scripts": {
-    "broker": "nodemon broker.js",
-    "subscriber": "nodemon subscriber.js",
-    "publisher": "nodemon publisher.js"
+    "broker": "node broker.js",
+    "subscriber": "node subscriber.js",
+    "publisher": "node publisher.js"
   },
   "author": "",
   "license": "ISC",
