@@ -40,7 +40,7 @@ client.on('connect', () => {
 });
 
 /**
- * Décommenter les lignes suivantes pour tester que le publicateur ne peux pas publier.
+ * Décommenter les lignes suivantes pour tester que le publicateur ne peux pas souscrire.
  */
 // client.on('connect', () => {
 //     client.subscribe(topic);
